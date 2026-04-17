@@ -43,9 +43,7 @@
         const cartItemsDiv = document.getElementById("cart-items");
         const cartCount = document.getElementById("cart-count");
         const cartTotal = document.getElementById("cart-total");
-
         cartItemsDiv.innerHTML = "";
-
         let total = 0;
         let totalItems = 0;
 
@@ -81,7 +79,6 @@
 
         localStorage.setItem("cart", JSON.stringify(cart));
     }
-
     function changeQuantity(id, amount) { //Functionailiy to change quantity of items in cart
         const item = cart.find(i => i.id === id);
         if (!item) return;
