@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.sql.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Spartan Exchange</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 
 <body>
 
-<header>
-    <h1>Spartan Exchange</h1>
+<header class="navbar">
+    <h1 class="logo">Spartan Exchange</h1>
 
-    <nav>
+    <nav class="nav-links">
         <a href="index.html">Home</a>
         <a href="login.html">Account</a>
         <a href="#">Help</a>
