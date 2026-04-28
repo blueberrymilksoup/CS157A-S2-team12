@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.ResultSet" %>
+<%@ page import="util.MySQLCon" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,93 +17,139 @@
 <header class="navbar">
     <h1 class="logo">Spartan Exchange</h1>
 
-    <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="login.html">Account</a>
-        <a href="#">Help</a>
-        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-    </nav>
+<nav class="nav-links">
+    <a href="<%= request.getContextPath() %>/index.jsp">Home</a>
+    <a href="<%= request.getContextPath() %>/login.jsp">Account</a>
+    <a href="#">Help</a>
+    <a href="<%= request.getContextPath() %>/cart.jsp">Cart</a>
+</nav>
 </header>
+
+
+
+<%
+Integer userId = (Integer) session.getAttribute("user_id");
+
+if (userId == null) {
+    response.sendRedirect("login.jsp?Error=Please login first");
+    return;
+}
+
+Connection con = null;
+PreparedStatement ps = null;
+ResultSet rs = null;
+
+double total = 0;
+int totalItems = 0;
+%>
 
 <main class="cart-page">
 
-    <!-- LEFT SIDE -->
     <section class="cart-left">
         <h2>Shopping Cart</h2>
-        <div id="cart-items"></div>
+
+        <%
+        try {
+            con = MySQLCon.getConnection();
+
+            String sql = "SELECT ci.cart_item_id, ci.product_id, p.product_name, p.price, ci.quantity " +
+                    "FROM cart c " +
+                    "JOIN cart_items ci ON c.cart_id = ci.cart_id " +
+                    "JOIN products p ON ci.product_id = p.product_id " +
+                    "WHERE c.user_id = ?";
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+
+            boolean hasItems = false;
+
+            while (rs.next()) {
+                hasItems = true;
+
+                String productName = rs.getString("product_name");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity"),
+                	 productId = rs.getInt("product_id");
+                
+                total += price * quantity;
+                totalItems += quantity;
+        %>
+
+        <div class="cart-item-row">
+    <img src="https://via.placeholder.com/120" alt="Product Image">
+
+    <div class="cart-info">
+        <h4><%= productName %></h4>
+        <p>$<%= String.format("%.2f", price) %></p>
+        <p>Quantity: <%= quantity %></p>
+
+        <div class="cart-actions">
+            <form action="<%= request.getContextPath() %>/cart" method="post" style="display:inline;">
+                <input type="hidden" name="action" value="increment">
+                <input type="hidden" name="productId" value="<%= productId %>">
+                <button type="submit">+</button>
+            </form>
+
+            <form action="<%= request.getContextPath() %>/cart" method="post" style="display:inline;">
+                <input type="hidden" name="action" value="decrement">
+                <input type="hidden" name="productId" value="<%= productId %>">
+                <button type="submit">-</button>
+            </form>
+
+            <form action="<%= request.getContextPath() %>/cart" method="post" style="display:inline;">
+                <input type="hidden" name="action" value="remove">
+                <input type="hidden" name="productId" value="<%= productId %>">
+                <button type="submit">Remove</button>
+            </form>
+        </div>
+    </div>
+</div>
+        <%
+            }
+
+            if (!hasItems) {
+        %>
+            <p>No items in cart.</p>
+        <%
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        %>
+            <p>Error loading cart.</p>
+        <%
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception e) {}
+            try { if (ps != null) ps.close(); } catch (Exception e) {}
+            try { if (con != null) con.close(); } catch (Exception e) {}
+        }
+        %>
     </section>
 
-    <!-- RIGHT SIDE -->
     <section class="cart-right">
-        <h3 id="cart-total">Subtotal: $0.00</h3>
+        <h3>Subtotal: $<%= String.format("%.2f", total) %></h3>
         <button class="checkout-btn">Proceed to Checkout</button>
     </section>
 
 </main>
-
-<script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || []; //Load cart data from local storage
-
-    function updateCartPage() {
-        const cartItemsDiv = document.getElementById("cart-items");
-        const cartCount = document.getElementById("cart-count");
-        const cartTotal = document.getElementById("cart-total");
-        cartItemsDiv.innerHTML = "";
-        let total = 0;
-        let totalItems = 0;
-
-        if (cart.length === 0) {
-            cartItemsDiv.innerHTML = "<p>No items in cart.</p>";
-        } else {
-            cart.forEach(item => {
-                total += item.price * item.quantity; //Value of the cart is calculated by multiplying price and quantity of each item and adding them up
-                totalItems += item.quantity;
-
-                cartItemsDiv.innerHTML += `
-                    <div class="cart-item-row">
-                        <img src="https://via.placeholder.com/120">
-                        
-                        <div class="cart-info">
-                            <h4>${item.name}</h4>
-                            <p>$${item.price.toFixed(2)}</p>
-
-                            <div class="cart-controls">
-                                <button onclick="changeQuantity(${item.id}, -1)">-</button>
-                                <span>${item.quantity}</span>
-                                <button onclick="changeQuantity(${item.id}, 1)">+</button>
-                                <button onclick="removeFromCart(${item.id})">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        cartTotal.innerText = "Subtotal: $" + total.toFixed(2);
-        cartCount.innerText = totalItems;
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }
-    function changeQuantity(id, amount) { //Functionailiy to change quantity of items in cart
-        const item = cart.find(i => i.id === id);
-        if (!item) return;
-
-        item.quantity += amount;
-
-        if (item.quantity <= 0) {
-            cart = cart.filter(i => i.id !== id);
-        }
-
-        updateCartPage(); //Update cart webpage after changing quantity of items in cart
-    }
-
-    function removeFromCart(id) { //Functionality to remove item from cart
-        cart = cart.filter(i => i.id !== id);
-        updateCartPage();
-    }
-
-    updateCartPage();
-</script>
-
 </body>
 </html>
+
+
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
