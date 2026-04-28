@@ -1,17 +1,23 @@
 import java.io.IOException;
+<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+=======
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 
 import util.MySQLCon;
 
+=======
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
 
 @WebServlet("/AuthServlet")
 public class AuthServlet extends HttpServlet {
@@ -24,6 +30,7 @@ public class AuthServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+<<<<<<< HEAD
         // SIGNUP
         if ("signup".equals(mode)) {
             try {
@@ -109,6 +116,12 @@ public class AuthServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("login.jsp?Error=Database error");
+=======
+        if ("signup".equals(mode)) {
+            response.sendRedirect("login.jsp?Success=Registered successfully");
+        } else {
+            response.sendRedirect("index.jsp");
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
         }
     }
 }

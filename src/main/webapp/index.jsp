@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.ResultSet" %>
 <%@ page import="util.MySQLCon" %>
 
@@ -31,6 +32,16 @@ if (search == null) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+=======
+<!DOCTYPE html>
+<%
+
+
+%>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
     <title>Spartan Exchange</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
@@ -39,6 +50,7 @@ if (search == null) {
 <header class="navbar">
     <div class="logo">Spartan Exchange</div>
 
+<<<<<<< HEAD
     <form class="nav-search" method="get" action="<%= request.getContextPath() %>/index.jsp">
     <input type="text" id="search-input" name="search" placeholder="Search products..."
            value="<%= request.getParameter("search") != null ? request.getParameter("search") : "" %>">
@@ -49,6 +61,18 @@ if (search == null) {
         <a href="#">Wishlist</a>
         <a href="#">Help</a>
         <a href="<%= request.getContextPath() %>/cart.jsp">Cart (0)</a>
+=======
+ <div class="nav-search">
+    <input type="text" id="search-input" placeholder="Search products...">
+    <button type="button" onclick="searchProducts()">Search</button>
+</div>
+
+    <nav class="nav-links">
+ 
+        <a href="#">Wishlist</a>
+        <a href="#">Help</a>
+        <a href="#">Cart (0)</a>
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
     </nav>
 </header>
 
@@ -56,6 +80,7 @@ if (search == null) {
     <section>
         <h2>Available Products</h2>
         <div class="product-container">
+<<<<<<< HEAD
         
  //Mainly for page structure and layout
  //Collects search input 
@@ -133,6 +158,75 @@ try { //Main part where it connects to the database
 //In which we want to display 
 
         </div>
+=======
+            <div class="product-card">
+                <h3>Textbook</h3>
+                <p>Good condition CS book</p>
+                <p>$40</p>
+                <button>Add to Cart</button>
+            </div>
+
+       <div class="product-container" id="product-grid"></div>
+       <script>
+const products = [
+    {
+        id: 1,
+        name: "Calculus Textbook",
+        price: 19.99,
+        image: "https://via.placeholder.com/200",
+        description: "Used textbook in good condition"
+    },
+    {
+        id: 2,
+        name: "Laptop Stand",
+        price: 29.99,
+        image: "https://via.placeholder.com/200",
+        description: "Adjustable aluminum stand"
+    },
+    {
+        id: 3,
+        name: "Desk Lamp",
+        price: 39.99,
+        image: "https://via.placeholder.com/200",
+        description: "LED lamp for study desk"
+    }
+];
+
+function displayProducts(productList) {
+const productGrid = document.getElementById("product-grid");
+productGrid.innerHTML = "";
+
+ if (productList.length === 0) {
+ productGrid.innerHTML = "<p>No matching products found.</p>";
+    return;
+    }
+
+ productList.forEach(product => {
+   const div = document.createElement("div");
+    div.className = "product-card";
+
+   div.innerHTML =
+            "<img src='" + product.image + "'>" +
+            "<h3>" + product.name + "</h3>" +
+            "<p>" + product.description + "</p>" +
+            "<p>$" + product.price.toFixed(2) + "</p>";
+            productGrid.appendChild(div);
+    });
+}
+
+function searchProducts() {
+  const value = document.getElementById("search-input").value.toLowerCase().trim();
+    const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(value) ||
+        p.description.toLowerCase().includes(value)
+    );
+
+  displayProducts(filtered);
+}
+
+displayProducts(products);
+</script>
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
     </section>
 </main>
 
@@ -140,5 +234,15 @@ try { //Main part where it connects to the database
     <p>&copy; 2026 Spartan Exchange</p>
 </footer>
 
+<<<<<<< HEAD
+=======
+<script src="<%= request.getContextPath() %>/js/script.js"></script>
+
+
+
+
+
+
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
 </body>
 </html>
