@@ -1,27 +1,23 @@
 package util;
-import java.sql.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 
-public class MySQLCon {
+/**
+ * JDBC helper — same pattern as AddToCartServlet. Configure DB via env vars or defaults.
+ */
+public final class MySQLCon {
 
-    public static Connection getConnection() {
-        Connection con = null;
+	private static final String JDBC_URL = System.getenv().getOrDefault("SPARTAN_JDBC_URL",
+			"jdbc:mysql://127.0.0.1:3306/spartanexchange?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true");
+	private static final String JDBC_USER = System.getenv().getOrDefault("SPARTAN_DB_USER", "root");
+	private static final String JDBC_PASS = System.getenv().getOrDefault("SPARTAN_DB_PASS", "");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+	private MySQLCon() {
+	}
 
-            con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/spartanexchange?useSSL=false&serverTimezone=UTC",
-                "root",
-                "11321132"
-            );
-
-            System.out.println("Connected!");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return con;
-    }
+	public static Connection getConnection() throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
+	}
 }
