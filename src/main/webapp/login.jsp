@@ -50,7 +50,7 @@ if (error !=null) {
 >>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
   %>
 
-
+<!-- for registration we need to add: full name and preferred name unless you want to make another page for adding that info -->
  
 <form id="auth-form" action="<%= request.getContextPath() %>/AuthServlet" method="post" onsubmit="return validateForm()">Bu
 <<<<<<< HEAD

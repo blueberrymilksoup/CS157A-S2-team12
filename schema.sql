@@ -252,28 +252,6 @@ CREATE TABLE `reviews` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `save_for_later`
---
-
-DROP TABLE IF EXISTS `save_for_later`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `save_for_later` (
-  `save_item_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `quantity` int NOT NULL DEFAULT '1',
-  `added_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`save_item_id`),
-  UNIQUE KEY `uq_save_user_product` (`user_id`,`product_id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `save_for_later_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `save_for_later_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `chk_save_quantity` CHECK ((`quantity` > 0))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `users`
 --
 
@@ -287,8 +265,6 @@ CREATE TABLE `users` (
   `sjsu_email` varchar(255) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
   `contact_details` varchar(255) DEFAULT NULL,
-  `user_type` enum('Student','Lecturer') NOT NULL,
-  `account_status` enum('Active','Suspended','Deactivated') NOT NULL DEFAULT 'Active',
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `sjsu_email` (`sjsu_email`),
@@ -325,4 +301,4 @@ CREATE TABLE `wishlist_items` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-14 23:56:16
+-- Dump completed on 2026-04-25 20:45:51
