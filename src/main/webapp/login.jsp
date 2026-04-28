@@ -7,6 +7,17 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/styles.css">
 </head>
 <body>
+<<<<<<< HEAD
+<div class= "login-container">
+<h2 id="form-title">Login</h2>
+
+//Mainly UI structure, displaying results and styling without the actual use of database yet 
+//Plan to add like picture of SJSU to make it more appeasing in terms of looks  (Background Image)
+ 
+
+<%
+//Decision making 
+=======
 
 
 <div class= "login-container">
@@ -15,6 +26,7 @@
 
 
 <%
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
 String error = request.getParameter("Error");
 String success = request.getParameter("Success");
 if (error !=null) {
@@ -22,16 +34,39 @@ if (error !=null) {
      <div class="message"><%= error %></div>
    <%
  }
+<<<<<<< HEAD
+ if (success != null) {
+    %>
+ <div class="message success"><%= success %></div>
+    
+    <%
+        } //This is mainly a condition to determine what message to display or recieve either success or error
+=======
         if (success != null) {
     %>
  <div class="message success"><%= success %></div>
     <%
         }
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
   %>
 
 <!-- for registration we need to add: full name and preferred name unless you want to make another page for adding that info -->
  
 <form id="auth-form" action="<%= request.getContextPath() %>/AuthServlet" method="post" onsubmit="return validateForm()">Bu
+<<<<<<< HEAD
+ <input type="hidden" id="mode" name="mode" value="login"> //User login or registration
+  
+<label for="email">Email</label>
+ <input type="email" id="email" name="email" required> //User email @sjsu.edu required
+
+
+ <label for="password">Password</label>
+<input type="password" id="password" name="password" required> //Password by the user
+        
+        
+ <div id="confirm-password-container" style="display: none;">
+ <label for="confirm_password">Confirm Password</label> //Comfirm password must be same as the password entered 
+=======
  <input type="hidden" id="mode" name="mode" value="login">
   
 <label for="email">Email</label>
@@ -44,6 +79,7 @@ if (error !=null) {
         
  <div id="confirm-password-container" style="display: none;">
  <label for="confirm_password">Confirm Password</label>
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
         <input type="password" id="confirm_password" name="confirm_password">
  </div>
  <button type = "submit" id="submit-btn">Login</button>
@@ -54,6 +90,14 @@ Do not have an account?
 </p>
 </div>
 
+<<<<<<< HEAD
+//This is just main authentication for login or registration 
+//It collects user credentials from AuthServlet.java 
+
+
+
+=======
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
 
 <script>
     let isLogin = true;
@@ -79,22 +123,36 @@ Do not have an account?
     		formTitle.textContent = "Sign UP";
             submitBtn.textContent = "Register Account";
             toggleText.innerHTML = `Already have an account? <a href="#" onclick="toggleMode(); return false;">Login</a>`;
+<<<<<<< HEAD
+    		confirmContainer.style.display="block";
+=======
     		confirmContainer.style.display="block"
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
     		confirmPasswordInput.required=false;
     		modeInput.value= "signup"
     		
     	}
     }	
+<<<<<<< HEAD
+//Validation from this function is not enough Auth is still needed for account authentication 
+=======
 
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
         function validateForm() {
         	const email = document.getElementById("email").value.trim().toLowerCase();
         	const password = document.getElementById("password").value;
         	const confirmPassword = document.getElementById("confirm_password").value;
         	const mode = document.getElementById("mode").value;
+<<<<<<< HEAD
+        	//Functionality for registration 
+    	
+    	//Ensures for SJSU email restriction
+=======
         	
     	
     	//Ensures for SJSU email restriction
     	
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
     	if (!(email.endsWith("@sjsu.edu")|| email.endsWith("@my.sjsu.edu"))) {
     		alert("Only with SJSU email addresses are allowed.");
     		return false;
@@ -104,7 +162,11 @@ Do not have an account?
     	if (mode=="signup") {
     			if (password!=confirmPassword){
     				alert("Passwords do not match please try again.")
+<<<<<<< HEAD
+    				return false; //Condition that ensures that the passwords match when registering account 
+=======
     				return false;
+>>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
     				
     			}
     		}
