@@ -29,6 +29,7 @@
 >>>>>>> 22a7930491fc55c68815f41620dd4f2da9ab03a6
 String error = request.getParameter("Error");
 String success = request.getParameter("Success");
+
 if (error !=null) {
 	 %>
      <div class="message"><%= error %></div>
