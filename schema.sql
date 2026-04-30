@@ -266,6 +266,9 @@ CREATE TABLE `users` (
   `password_hash` varchar(255) NOT NULL,
   `contact_details` varchar(255) DEFAULT NULL,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('Suspended','Active','Deactivated') NOT NULL,
+  -- sorry meera for telling you to delete the status line, we do need it :(
+  -- i re-added it based on your sql code
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `sjsu_email` (`sjsu_email`),
   CONSTRAINT `chk_sjsu_email` CHECK ((`sjsu_email` like _utf8mb4'%@sjsu.edu'))

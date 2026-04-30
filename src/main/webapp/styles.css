@@ -190,6 +190,16 @@ footer {
     cursor: pointer;
 }
 
+.admin-functions-box {
+    background-color: white;
+    margin: 20px;
+    padding: 10px;
+}
+
+.admin-functions-headers{
+    text-align: center;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1000px) {
     .product-grid {
