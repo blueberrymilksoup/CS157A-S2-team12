@@ -2,8 +2,8 @@
 <%@ page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.ResultSet" %>
 <%@ page import="util.MySQLCon" %>
 
-//The imports make necessary formatting as it makes sure its under java but the content is in HTML formating
-//The second and third makes it possible for database connection its a live represantation to connection to databse
+<%-- The imports make necessary formatting as it makes sure its under java but the content is in HTML formating --%>
+<%-- The second and third makes it possible for database connection its a live represantation to connection to databse--%>
 
 
 
@@ -20,8 +20,8 @@ if (search == null) {
 }
 %>
 
-//Declaring the values first before assigning real values later with the help of try block
-//Because we do not have the values yet its in database
+<%-- Declaring the values first before assigning real values later with the help of try block--%>
+<%--Because we do not have the values yet its in database --%>
 
 
 

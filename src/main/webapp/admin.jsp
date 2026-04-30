@@ -15,7 +15,7 @@ if (role == null || !role.equals("admin")) {
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>styles.css">
 </head>
 <body>
 
@@ -36,16 +36,6 @@ if (role == null || !role.equals("admin")) {
         <br>
         
         
-             <div class="section">
-        <h2>User Management</h2>
-        <ul>
-            <li><a href="#">Monitor User Accounts</a></li>
-            <li><a href="#">Suspend User Account</a></li>
-            <li><a href="#">Reactivate User Account</a></li>
-        </ul>
-    </div>
-    
-    
     <div class="section">
         <h2>User Management</h2>
         <ul>
@@ -54,3 +44,7 @@ if (role == null || !role.equals("admin")) {
             <li><a href="#">Reactivate User Account</a></li>
         </ul>
     </div>
+    <!-- there were two of this user management div so i (samantha) deleted it -->
+    
+</body>
+</html>
