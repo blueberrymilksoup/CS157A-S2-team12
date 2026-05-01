@@ -57,10 +57,10 @@ if (search == null) {
         <h2>Available Products</h2>
         <div class="product-container">
         
- //Mainly for page structure and layout
- //Collects search input 
- //Sends request to tomcat server
- //Does not have database query by itself thats where the try block below comes in       
+<!--  Mainly for page structure and layout
+ Collects search input 
+ Sends request to tomcat server
+ Does not have database query by itself thats where the try block below comes in    -->    
         
         
 <%

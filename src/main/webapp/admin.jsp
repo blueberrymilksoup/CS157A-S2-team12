@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.ResultSet" %>
+<%@ page import="util.MySQLCon" %>
 
 <%
 String role = (String) session.getAttribute("role");
