@@ -46,7 +46,7 @@ if (search == null) {
 </form>
 
     <nav class="nav-links">
-        <a href="#">Wishlist</a>
+        <a href="<%= request.getContextPath() %>/wishlist.jsp">Wishlist</a>
         <a href="#">Help</a>
         <a href="<%= request.getContextPath() %>/cart.jsp">Cart (0)</a>
     </nav>

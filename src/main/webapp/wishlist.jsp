@@ -36,5 +36,13 @@
 	%>
 	<!-- just taken from the cart.jsp to verify that user is logged in -->
 
+	<h2>Wishlist</h2>
+	<%
+        try {
+            con = MySQLCon.getConnection();
+        String sql = "SELECT ";
+            
+   	%>
+
 </body>
 </html>
