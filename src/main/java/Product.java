@@ -9,7 +9,6 @@ public class Product {
 	private String productStatus;
 	private LocalDate dateAdded;
 	private String lowStockNotice;
-	private int userId;
 	private int categoryId;
     private int createdByAdminId;
 
@@ -25,7 +24,6 @@ public class Product {
 			String productStatus,
 			LocalDate dateAdded,
 			String lowStockNotice, 
-			int userId,
 			int categoryId,
 			int createdByAdminId
 			) { // i hate when parameters are like this but it's easier to see
@@ -39,7 +37,6 @@ public class Product {
 		this.productStatus = productStatus;
 		this.dateAdded = dateAdded;
 		this.lowStockNotice = lowStockNotice;
-		this.userId = userId;
 		this.categoryId = categoryId;
 		this.createdByAdminId =  createdByAdminId;
 
@@ -119,14 +116,6 @@ public class Product {
 
 	public void setLowStockNotice(String lowStockNotice) {
 		this.lowStockNotice = lowStockNotice;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	public int getCategoryId() {
